@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  table_calendar: ^3.0.2  # バージョンは最新のものに置き換えても構いません
   flutter_vector_icons: ^1.0.0
 
 dev_dependencies:

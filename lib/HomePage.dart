@@ -8,6 +8,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   TextEditingController _titleController = TextEditingController();
+  List<DateTime> _selectedDays = [];
 
   @override
   void dispose() {
@@ -43,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => FirstPage(title: title),
+                    builder: (context) => FirstPage(title: title, selectedDays: _selectedDays),
                   ),
                 );
               },

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'ResultPage.dart';
 
 class FirstPage extends StatefulWidget {
   final String title;
+  final List<DateTime> selectedDays;
 
-  FirstPage({required this.title});
+  FirstPage({required this.title, required this.selectedDays});
 
   @override
   _FirstPageState createState() => _FirstPageState();
@@ -13,8 +15,23 @@ class FirstPage extends StatefulWidget {
 class _FirstPageState extends State<FirstPage> {
   CalendarFormat _calendarFormat = CalendarFormat.month;
   DateTime _focusedDay = DateTime.now();
-  Map<DateTime, List<int>> _stampCounts = {};
   List<DateTime> _selectedDays = [];
+
+  @override
+  void initState() {
+    _selectedDays = List.from(widget.selectedDays);
+    super.initState();
+  }
+
+  void registerSelectedDays() {
+    print('Selected Days: $_selectedDays');
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ResultPage(title: widget.title, selectedDays: _selectedDays),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,14 +101,22 @@ class _FirstPageState extends State<FirstPage> {
           Container(
             color: Colors.grey[200],
             padding: EdgeInsets.symmetric(vertical: 10),
-            child: Center(
-              child: Text(
-                'Selected Days: ${_selectedDays.length}',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: registerSelectedDays,
+                  child: Text('登録'),
                 ),
-              ),
+                SizedBox(width: 16),
+                Text(
+                  'Selected Days: ${_selectedDays.length}',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

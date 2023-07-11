@@ -50,20 +50,31 @@ class _FirstPageState extends State<FirstPage> {
               },
               calendarBuilders: CalendarBuilders(
                 selectedBuilder: (context, date, _) {
+                  // Add color and photo (stamp) when selected
                   return Container(
                     margin: EdgeInsets.all(4),
                     decoration: BoxDecoration(
-                      color: Colors.blue[200],
+                      color: Colors.green, // Change color to desired color
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Center(
-                      child: Text(
-                        '${date.day}',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                    child: Stack(
+                      children: [
+                        Center(
+                          child: Text(
+                            '${date.day}',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
                         ),
-                      ),
+                        Positioned.fill(
+                          child: Image.asset(
+                            '../asset/egaonotaiyou_ki.png', // Replace with the path to your image (stamp)
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 },
@@ -99,7 +110,7 @@ class _FirstPageState extends State<FirstPage> {
             ),
           ),
           Container(
-            color: Colors.grey[200],
+            color: Color.fromARGB(255, 191, 227, 250),
             padding: EdgeInsets.symmetric(vertical: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -124,6 +135,7 @@ class _FirstPageState extends State<FirstPage> {
     );
   }
 }
+
 
 bool isSameDay(DateTime a, DateTime b) {
   return a.year == b.year && a.month == b.month && a.day == b.day;
